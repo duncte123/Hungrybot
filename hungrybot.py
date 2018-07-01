@@ -34,7 +34,8 @@ async def new(ctx, *, title: str = None):
     title - (Optional) The title of the simulation. Defaults to 'The Hunger Games'
     """
     if title is None or title == "":
-        title = "The Hunger Games"
+        # title = "The Hunger Games"
+        title = "Kuro's VIP Hunger Games"
     else:
         title = __strip_mentions(ctx.message, title)
         title = __sanitize_here_everyone(title)
