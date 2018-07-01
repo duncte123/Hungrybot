@@ -16,6 +16,9 @@ hg = HungerGames()
 @bot.event
 async def on_ready():
     print('Logged in!')
+    await bot.change_presence(
+        activity=discord.Game(name="{}help".format(prefix), url=None, type=2)
+    )
 
 
 @bot.command()
@@ -76,6 +79,10 @@ async def add(ctx, *, name: str):
     name = __strip_mentions(ctx.message, name)
     name = __sanitize_here_everyone(name)
     name = __sanitize_special_chars(name)
+
+    if "oro" in name.lower():
+        await ctx.reply("NO! Oro cannot be added")
+        return
 
     ret = hg.add_player(ctx.channel.id, name)
     if not await __check_errors(ctx, ret):
