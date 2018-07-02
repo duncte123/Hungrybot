@@ -112,6 +112,7 @@ async def fill(ctx, group_name=None):
     Pad out empty slots in a new game with default characters.
 
     group_name (Optional) - The builtin group to draw tributes from. Defaults to members in this guild.
+    \tDefault group names are hungergames and melee
     """
     if group_name is None:
         group = []
