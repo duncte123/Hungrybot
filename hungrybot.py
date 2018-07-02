@@ -59,8 +59,8 @@ async def join(ctx, gender=None):
 
     gender (Optional) - Use `-m` or `-f` to set male or female gender. Defaults to a random gender.
     """
-    name = ctx.author.nick if ctx.author.nick is not None else ctx.author.name
-    ret = hg.add_player(ctx.channel.id, name, gender=gender, volunteer=True)
+    # name = ctx.author.nick if ctx.author.nick is not None else ctx.author.name
+    ret = hg.add_player(ctx.channel.id, ctx.author.mention, gender=gender, volunteer=True)
     if not await __check_errors(ctx, ret):
         return
     await ctx.reply(ret)
