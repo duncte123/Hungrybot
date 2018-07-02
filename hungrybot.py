@@ -80,10 +80,6 @@ async def add(ctx, *, name: str):
     name = __sanitize_here_everyone(name)
     name = __sanitize_special_chars(name)
 
-    if "oro" in name.lower():
-        await ctx.reply("NO! Oro cannot be added")
-        return
-
     ret = hg.add_player(ctx.channel.id, name)
     if not await __check_errors(ctx, ret):
         return
@@ -233,14 +229,17 @@ def __strip_mentions(message: discord.Message, text):
     roles = message.role_mentions
 
     for m in members:
-        name = m.nick if m.nick is not None else m.name
-        text = re.sub(m.mention, name, text)
+        # name = m.nick if m.nick is not None else m.name
+        # text = re.sub(m.mention, name, text)
+        text = m.mention
 
     for c in channels:
-        text = re.sub(c.mention, c.name, text)
+        # text = re.sub(c.mention, c.name, text)
+        text = c.mention
 
     for r in roles:
-        text = re.sub(r.mention, r.name, text)
+        # text = re.sub(r.mention, r.name, text)
+        text = r.mention
 
     return text
 
@@ -252,7 +251,7 @@ def __sanitize_here_everyone(text):
 
 
 def __sanitize_special_chars(text):
-    text = re.sub('@', '\\@', text)
+    # text = re.sub('@', '\\@', text)
     text = re.sub('~~', '\\~\\~', text)
     text = re.sub('\*', '\\*', text)
     text = re.sub('`', '\\`', text)
