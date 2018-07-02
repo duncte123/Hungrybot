@@ -117,10 +117,11 @@ async def fill(ctx, group_name=None):
     if group_name is None:
         group = []
         for m in list(ctx.message.guild.members):
-            if m.nick is not None:
-                group.append(m.nick)
-            else:
-                group.append(m.name)
+            group.append(m.mention)
+            # if m.nick is not None:
+            #     group.append(m.nick)
+            # else:
+            #     group.append(m.name)
     else:
         group = default_players.get(group_name)
 
