@@ -237,18 +237,17 @@ def __strip_mentions(message: discord.Message, text):
     channels = message.channel_mentions
     roles = message.role_mentions
 
-    for m in members:
-        # name = m.nick if m.nick is not None else m.name
-        # text = re.sub(m.mention, name, text)
-        text = m.mention
+    # for m in members:
+    #     name = m.nick if m.nick is not None else m.name
+    #     text = re.sub(m.mention, name, text)
 
     for c in channels:
-        # text = re.sub(c.mention, c.name, text)
-        text = c.mention
+        text = re.sub(c.mention, "#" + c.name, text)
+        # text = c.mention
 
     for r in roles:
-        # text = re.sub(r.mention, r.name, text)
-        text = r.mention
+        text = re.sub(r.mention, "@" + r.name, text)
+        # text = r.mention
 
     return text
 

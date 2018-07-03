@@ -25,6 +25,8 @@ class HungerGames:
         if len(this_game.players) >= 24:
             return ErrorCode.GAME_FULL
 
+        print(name.lower())
+
         if gender is not None:
             if type(gender) is bool:
                 is_male = gender
