@@ -25,8 +25,6 @@ class HungerGames:
         if len(this_game.players) >= 24:
             return ErrorCode.GAME_FULL
 
-        print(name.lower())
-
         if gender is not None:
             if type(gender) is bool:
                 is_male = gender
@@ -88,7 +86,7 @@ class HungerGames:
                 ret = self.add_player(channel_id, p[0], p[1])
             else:
                 ret = self.add_player(channel_id, p, None)
-            if ret is not ErrorCode.PLAYER_EXISTS:
+            if ret is not ErrorCode.PLAYER_EXISTS:  # ################
                 messages.append(ret)
 
         if len(messages) == 0:

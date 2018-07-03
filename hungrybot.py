@@ -11,6 +11,8 @@ from config import config
 prefix = config['prefix']
 bot = HungryBot(command_prefix=prefix, description="A Hunger Games simulator bot")
 hg = HungerGames()
+vipRole = 385916568447483915
+kuro = 320637555278348290
 
 
 @bot.event
@@ -118,13 +120,16 @@ async def fill(ctx, group_name=None):
     if group_name is None:
         role = None
         for r in ctx.message.guild.roles:
-            if r.id == 385916568447483915:
+            if r.id == vipRole:
                 role = r
 
         group = []
         for m in list(ctx.message.guild.members):
             if role in m.roles:
-                group.append(m.mention)
+                    if m.id != kuro:
+                        group.append(m.mention)
+                    else:
+                        group.append(__member_to_name(m))
                 # if m.nick is not None:
                 #     group.append(m.nick)
                 # else:
@@ -135,7 +140,12 @@ async def fill(ctx, group_name=None):
     ret = hg.pad_players(ctx.channel.id, group)
     if not await __check_errors(ctx, ret):
         return
-    await ctx.send(ret)
+
+    # 0xaaaaaa
+    game = hg.active_games[ctx.channel.id]
+    embed = discord.Embed(title="Tributes added | {}".format(game.title), color=0xaaaaaa, description=ret)
+    # await ctx.send(ret)
+    await ctx.send(embed=embed)
 
 
 @bot.command()
@@ -233,7 +243,7 @@ async def __check_errors(ctx, error_code):
 
 
 def __strip_mentions(message: discord.Message, text):
-    members = message.mentions
+    # members = message.mentions
     channels = message.channel_mentions
     roles = message.role_mentions
 
@@ -265,6 +275,10 @@ def __sanitize_special_chars(text):
     text = re.sub('`', '\\`', text)
     text = re.sub('_', '\\_', text)
     return text.strip()
+
+
+def __member_to_name(member):
+    return member.nick if member.nick is not None else member.name
 
 
 bot.run(config['token'])
