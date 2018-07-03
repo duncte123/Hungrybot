@@ -1,3 +1,4 @@
 config = {
-    'token': "your_token_here"
+    'token': "your_token_here",
+    'prefix': '''h$'''
 }

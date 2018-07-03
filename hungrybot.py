@@ -8,7 +8,7 @@ from enums import ErrorCode
 from bot import HungryBot
 from config import config
 
-prefix = '''h$'''
+prefix = config['prefix']
 bot = HungryBot(command_prefix=prefix, description="A Hunger Games simulator bot")
 hg = HungerGames()
 
@@ -114,14 +114,21 @@ async def fill(ctx, group_name=None):
     group_name (Optional) - The builtin group to draw tributes from. Defaults to members in this guild.
     \tDefault group names are hungergames and melee
     """
+    # The id for the vip role is 385916568447483915
     if group_name is None:
+        role = None
+        for r in ctx.message.guild.roles:
+            if r.id == 385916568447483915:
+                role = r
+
         group = []
         for m in list(ctx.message.guild.members):
-            group.append(m.mention)
-            # if m.nick is not None:
-            #     group.append(m.nick)
-            # else:
-            #     group.append(m.name)
+            if role in m.roles:
+                group.append(m.mention)
+                # if m.nick is not None:
+                #     group.append(m.nick)
+                # else:
+                #     group.append(m.name)
     else:
         group = default_players.get(group_name)
 

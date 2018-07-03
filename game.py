@@ -169,6 +169,7 @@ class Game:
                 active_players.append(p)
                 extra_tributes -= 1
 
+            # TODO: This can be none
             msg = action['msg'].format(*active_players)
 
             if action.get('killed') is not None:
