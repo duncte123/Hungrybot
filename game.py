@@ -170,17 +170,18 @@ class Game:
                 extra_tributes -= 1
 
             # TODO: This can be none
-            msg = action['msg'].format(*active_players)
+            if action.get('msg') is not None:
+                msg = action['msg'].format(*active_players)
 
-            if action.get('killed') is not None:
-                if action.get('killer') is not None:
-                    for kr in action['killer']:
-                        active_players[kr].kills += len(action['killed'])
-                for kd in action['killed']:
-                    active_players[kd].alive = False
-                    self.players_dead_today.append(active_players[kd])
-                    self.total_players_alive -= 1
-                    active_players[kd].cause_of_death = msg
+                if action.get('killed') is not None:
+                    if action.get('killer') is not None:
+                        for kr in action['killer']:
+                            active_players[kr].kills += len(action['killed'])
+                    for kd in action['killed']:
+                        active_players[kd].alive = False
+                        self.players_dead_today.append(active_players[kd])
+                        self.total_players_alive -= 1
+                        active_players[kd].cause_of_death = msg
 
-            messages.append(msg)
+                messages.append(msg)
         return messages
