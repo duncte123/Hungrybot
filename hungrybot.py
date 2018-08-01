@@ -19,7 +19,7 @@ kuro = 320637555278348290
 async def on_ready():
     print('Logged in!')
     await bot.change_presence(
-        activity=discord.Game(name="{}help".format(prefix), url=None, type=2)
+        activity=discord.Game(name="{}help".format(prefix), type=discord.ActivityType.listening)
     )
 
 
