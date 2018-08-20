@@ -128,8 +128,8 @@ async def fill(ctx, group_name=None):
             if role in m.roles:
                     if m.id != kuro:
                         group.append(m.mention)
-                    else:
-                        group.append(__member_to_name(m))
+                    # else:
+                    #     group.append(__member_to_name(m))
                 # if m.nick is not None:
                 #     group.append(m.nick)
                 # else:
