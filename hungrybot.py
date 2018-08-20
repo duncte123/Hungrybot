@@ -13,6 +13,7 @@ bot = HungryBot(command_prefix=prefix, description="A Hunger Games simulator bot
 hg = HungerGames()
 vipRole = 385916568447483915
 kuro = 320637555278348290
+me = 191231307290771456
 
 
 @bot.event
@@ -202,6 +203,12 @@ async def step(ctx):
         embed.set_footer(text=ret['footer'])
     await ctx.send(embed=embed)
 
+@bot.command()
+@commands.guild_only()
+async def shutdown(ctx):
+    if ctx.author.id == me:
+        await ctx.message.add_reaction('✅')
+        await bot.close()
 
 async def __check_errors(ctx, error_code):
     if type(error_code) is not ErrorCode:
@@ -271,7 +278,7 @@ def __sanitize_here_everyone(text):
 def __sanitize_special_chars(text):
     # text = re.sub('@', '\\@', text)
     text = re.sub('~~', '\\~\\~', text)
-    text = re.sub('\*', '\\*', text)
+    text = re.sub(r'\*', '\\*', text)
     text = re.sub('`', '\\`', text)
     text = re.sub('_', '\\_', text)
     return text.strip()
