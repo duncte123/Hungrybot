@@ -8,7 +8,7 @@ class Player:
         self.cause_of_death = ""
 
     def __str__(self):
-        return self.name
+        return f"**{self.name}**"
 
     def __eq__(self, other):
         if isinstance(other, self.__class__):
