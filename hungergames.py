@@ -104,7 +104,7 @@ class HungerGames:
             if p.alive:
                 player_list.append("District {0} {1} | **{2}**".format(p.district, gender_symbol, p.name))
             else:
-                player_list.append("~~District {0} {1} | **{2}**~~".format(p.district, gender_symbol, p.name))
+                player_list.append("~~District {0} {1} | {2}~~".format(p.district, gender_symbol, p.name))
 
         summary = {
             'title': this_game.title,
@@ -134,7 +134,7 @@ class HungerGames:
         player_list = []
         for p in this_game.players_sorted:
             gender_symbol = "♂" if p.is_male else "♀"
-            player_list.append("District {0} {1} | **{2}**".format(p.district, gender_symbol, p.name))
+            player_list.append("District {0} {1} | {2}".format(p.district, gender_symbol, p.name))
 
         return {'title': "{0} | The Reaping".format(this_game.title),
                 'footer': "Total Players: {0} | Owner {1}".format(len(this_game.players), this_game.owner_name),
