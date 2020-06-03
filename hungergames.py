@@ -184,11 +184,11 @@ class HungerGames:
             }
 
         if summary['description'] is not None and len(summary['messages']) > 0:
-            formatted_msg = "{0}\n\n> {1}".format(summary['description'], "\n> ".join(summary['messages']))
+            formatted_msg = "{0}\n\n\\> {1}".format(summary['description'], "\n\\> ".join(summary['messages']))
         elif summary['description'] is not None:
             formatted_msg = summary['description']
         else:
-            formatted_msg = "> {0}".format("\n> ".join(summary['messages']))
+            formatted_msg = "\\> {0}".format("\n\\> ".join(summary['messages']))
 
         return {
             'title': summary['title'],
